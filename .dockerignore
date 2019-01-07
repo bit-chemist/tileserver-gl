@@ -5,3 +5,4 @@ test_data
 light
 config.json
 *.mbtiles
+.idea
