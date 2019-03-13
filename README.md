@@ -7,7 +7,48 @@
 
 Vector and raster maps with GL styles. Server side rendering by Mapbox GL Native. Map tile server for Mapbox GL JS, Android, iOS, Leaflet, OpenLayers, GIS via WMTS, etc.
 
-## Get Started
+## Using Docker
+
+An alternative to npm to start the packed software easier is to install [Docker](http://www.docker.com/) on your computer and then run in the directory with the downloaded MBTiles the command:
+
+Clone the repository:
+```
+git clone git@github.com:Rapid-Imaging-Tech/tileserver-gl.git
+```
+or
+```
+git clone https://github.com/Rapid-Imaging-Tech/tileserver-gl.git
+```
+
+Build the tileserver-gl docker image with the following command:
+```
+docker build -t tileserver-gl .
+```
+
+To run the docker image, you will need to change into the data directory where the MBTiles files live (or the directory where the Switzerland test file will download)
+```
+cd your-data-directory-path
+```
+
+Run the docker image locally with the following command in a terminal. 
+
+```bash
+docker run --rm -it -v $(pwd):/data -p 8080:8080 tileserver-gl
+```
+
+This will run the image with the following options:  
+`--rm` (removes the container upon exit)  
+`-it` (allocates a psudo TTY)  
+`-v $(pwd):/data`  (mounts a host directory to a container directory pattern: host-dir:container-dir)  
+`-p 8080:8080` (binds a host port to a container port - pattern: host-port:container-port)  
+`tileserver-gl` (this is the name of the container you built in the previous step)  
+  
+You will find the server at `http://localhost:8080/`  
+Logging will be output to the terminal
+  
+To exit the server issue CTRL-C in the terminal
+
+## Local Install
 
 Make sure you have Node.js version **6** installed (running `node -v` it should output something like `v6.11.3`).
 
@@ -30,18 +71,6 @@ tileserver-gl zurich_switzerland.mbtiles
 ```
 
 Alternatively, you can use the `tileserver-gl-light` package instead, which is pure javascript (does not have any native dependencies) and can run anywhere, but does not contain rasterization on the server side made with MapBox GL Native.
-
-## Using Docker
-
-An alternative to npm to start the packed software easier is to install [Docker](http://www.docker.com/) on your computer and then run in the directory with the downloaded MBTiles the command:
-
-```bash
-docker run --rm -it -v $(pwd):/data -p 8080:80 klokantech/tileserver-gl
-```
-
-This will download and start a ready to use container on your computer and the maps are going to be available in webbrowser on localhost:8080.
-
-On laptop you can use [Docker Kitematic](https://kitematic.com/) and search "tileserver-gl" and run it, then drop in the 'data' folder the MBTiles.
 
 ## Documentation
 
