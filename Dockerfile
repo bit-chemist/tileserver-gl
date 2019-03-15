@@ -25,7 +25,6 @@ RUN rm /bin/sh \
 COPY / /root/
 
 # initialize the submodules
-RUN ls -al $HOME
 RUN cd $HOME \
 && git submodule init \
 && git submodule update \
@@ -47,7 +46,7 @@ RUN cd /root && npm install --production
 
 # install tileserver-gl-styles
 RUN cd $HOME/tileserver-gl-styles \
-&& git checkout master && node publish.js \
+&& git checkout master && git pull && node publish.js \
 && cd $HOME \
 && mv tileserver-gl-styles/ $HOME/node_modules/
 
@@ -71,14 +70,14 @@ RUN rm /bin/sh \
     apt-transport-https \
     curl \
     unzip \
-    build-essential \
+#    build-essential \
     python \
-    libcairo2-dev \
+#    libcairo2-dev \
     libgles2-mesa-dev \
-    libgbm-dev \
+#    libgbm-dev \
     libllvm3.9 \
-    libprotobuf-dev \
-    libxxf86vm-dev \
+#    libprotobuf-dev \
+#    libxxf86vm-dev \
     xvfb \
     x11-utils \
 && apt-get clean
