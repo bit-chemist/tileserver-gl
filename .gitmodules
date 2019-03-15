@@ -1,0 +1,3 @@
+[submodule "tileserver-gl-styles"]
+	path = tileserver-gl-styles
+	url = https://github.com/Rapid-Imaging-Tech/tileserver-gl-styles
